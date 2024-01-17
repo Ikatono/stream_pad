@@ -1,0 +1,49 @@
+#important reference: https://www.usb.org/sites/default/files/hut1_4.pdf
+
+config:
+  #the
+  pages:
+      #main purpose of the name is for internal reference
+    - name: first_page
+      #action of rotary encoder
+      wheel: volume
+      #text when no key is held
+      text: FIRST PAGE
+      keys:
+        0:
+          #mutes the system speaker
+          #see "System Speaker Mute" under Generic(0x01)
+          action: Mute
+          #text that displays while this key is held
+          #if the key is held, it won't do
+          text: MUTE
+          #color of the LED for this key
+          color: blue
+        #use a number or string for the key, doesn't matter
+        "1":
+          action:
+            #presses each of these keys in sequence, then releases them all
+            - ctrl
+            - alt
+            - del
+          text: TASK MANAGER
+          #specify color in hex
+          color: '0x01ab45'
+          #after performing action (or instead if there is no action), change the page
+          goto: second_page
+        #presumably most pages define all 12 keys
+    - name: second_page
+      wheel: mic_volume
+      text:
+        #use an array of strings to separate lines
+        - SECOND
+        - PAGE
+      keys:
+        0:
+          action:
+            #start a process
+            exec: ./scripts/do_cool_think.sh
+            #optional, used to kill (interact?) with process later
+            name: cool_thing_doer
+          #possible format for decimal RGB
+          color: "12,13,14"
