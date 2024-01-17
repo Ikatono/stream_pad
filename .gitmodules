@@ -1,0 +1,3 @@
+[submodule "EmbeddedProto"]
+	path = EmbeddedProto
+	url = github:Embedded-AMS/EmbeddedProto.git
