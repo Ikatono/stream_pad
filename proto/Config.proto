@@ -38,5 +38,5 @@ message Config {
         WheelAction wheel_action = 14;
     }
     repeated Page pages = 1;
-    optional WheelAction = 2;
+    optional WheelAction wheel_action = 2;
 }
