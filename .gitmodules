@@ -1,3 +1,6 @@
 [submodule "EmbeddedProto"]
 	path = EmbeddedProto
 	url = github:Embedded-AMS/EmbeddedProto.git
+[submodule "pico-sdk"]
+	path = pico-sdk
+	url = github:raspberrypi/pico-sdk.git
