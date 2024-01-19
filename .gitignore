@@ -1,3 +1,7 @@
 *.code-workspace
 *.kate-swp
 build/*
+#these are the generated source files for the embedded protobuf
+src/protogen/*
+#python virtual environment
+*/venv/*

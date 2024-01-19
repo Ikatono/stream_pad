@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+namespace Configuration
+{
 struct Pixel
 {
   uint32_t value;
@@ -20,5 +22,6 @@ struct Pixel
   uint8_t& white() { return *(reinterpret_cast<uint8_t*>(value)+0); }
   #endif
 };
+}
 
 #endif //H_FF2FF9A6BC114C719F44441B6FD238C2

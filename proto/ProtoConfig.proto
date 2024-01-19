@@ -1,4 +1,5 @@
 syntax = "proto3";
+package Messaging;
 
 enum WheelAction {
     None = 0;
@@ -38,5 +39,4 @@ message Config {
         WheelAction wheel_action = 14;
     }
     repeated Page pages = 1;
-    optional WheelAction wheel_action = 2;
 }
