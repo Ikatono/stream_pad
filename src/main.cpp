@@ -3,9 +3,11 @@
 #include "ProtoConfig.h"
 #include "ReadBufferInterface.h"
 #include "ReadBufferFixedSize.h"
-//#include <stdio.h>
+#include <stdio.h>
 #include "pico/stdlib.h"
 #include <cstring>
+#include "Neopixels.hpp"
+#include "ReadKeys.hpp"
 
 constexpr uint32_t MAX_KEY_PRESSES = 5;
 constexpr uint32_t MAX_STR_LENGTH = 50;
@@ -27,7 +29,27 @@ char config_buffer[1024];
 extern "C"
 int main()
 {
-    stdio_init_all();
+    //stdio_init_all();
+    //sleep_ms(10 * 1000);
+    //puts("boot\n");
+    //printf("boot\n");
+    // LED::init_neopixels(Pin::NEOPIXEL);
+    // Configuration::Pixel pix;
+    // pix.red() = 100;
+    // pix.green() = 100;
+    // pix.blue() = 100;
+    // for (int i = 0; i < 12; i++)
+    //     LED::put_pixel(pix);
+    // Hardware::init_keys();
+    LED::init_notification_led();
+    while (1)
+    {
+        auto keys = Hardware::read_keys();
+        LED::set_notification_led(keys.data != 0);
+        printf("Keys: {}\n", keys.data);
+        sleep_ms(1000);
+    }
+    //block scope to keep the deserialized config around as little as possible
     {
         EmbeddedProto::ReadBufferFixedSize<BUFFER_SIZE> buffer;
         ConfigDeser config_message;
