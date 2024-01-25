@@ -7,10 +7,10 @@ namespace Hardware
 {
     struct WheelState
     {
+        int32_t count;
         bool a;
         bool b;
         bool button;
-        int32_t count;
     };
     void init_wheel();
     WheelState get_wheel_state();

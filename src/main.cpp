@@ -26,7 +26,7 @@ Configuration::Config config;
 Configuration::Page *active_page;
 char config_buffer[1024];
 
-extern "C"
+//extern "C"
 int main()
 {
     //stdio_init_all();
@@ -42,10 +42,12 @@ int main()
     //     LED::put_pixel(pix);
     // Hardware::init_keys();
     LED::init_notification_led();
+    LED::set_notification_led(true);
     while (1)
     {
         auto keys = Hardware::read_keys();
-        LED::set_notification_led(keys.data != 0);
+        //LED::set_notification_led(keys.data != 0);
+        LED::set_notification_led(true);
         printf("Keys: {}\n", keys.data);
         sleep_ms(1000);
     }

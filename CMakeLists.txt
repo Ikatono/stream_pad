@@ -18,6 +18,25 @@ pico_sdk_init()
 
 pico_generate_pio_header(stream_pad ${CMAKE_CURRENT_LIST_DIR}/src/Neopixel.pio)
 
+add_compile_definitions(
+        TARGET_RP2040
+        PICO_FLASH_SIZE_BYTES=8388608
+        ARDUINO_ADAFRUIT_MACROPAD_RP2040
+        USBD_PID=0x8107
+        USBD_VID=0x239a
+        USBD_MAX_POWER_MA=250
+        ARM_MATH_CM0_FAMILY
+        ARM_MATH_CM0_PLUS
+        CFG_TUSB_MCU=OPT_MCU_RP2040
+        USBD_MAX_POWER_MA=250
+)
+
+target_compile_options(stream_pad PUBLIC -Osize)
+
+set_property()
+
+pico_set_linker_script(stream_pad ${CMAKE_CURRENT_LIST_DIR}/src/memmap_custom2.ld)
+
 target_sources(stream_pad PRIVATE
 	src/main.cpp
         src/Page.cpp
@@ -43,11 +62,11 @@ target_link_libraries(stream_pad
         pico_stdlib
         hardware_pio
         pico_unique_id
-        #tinyusb_device
-        #tinyusb_board
+        tinyusb_device
+        tinyusb_board
         )
 
-pico_enable_stdio_usb(stream_pad 0)
-pico_enable_stdio_uart(stream_pad 1)
+pico_enable_stdio_usb(stream_pad 1)
+pico_enable_stdio_uart(stream_pad 0)
 
 pico_add_extra_outputs(stream_pad)
